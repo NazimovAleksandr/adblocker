@@ -5,6 +5,13 @@
 // getting the RustAdBlocker object
 val rustAdBlocker: RustAdBlocker = RustAdBlocker.instance()
 
+// setting the rules
+rustAdBlocker.setRules(
+    listOf(
+        "https://easylist.to/easylist/easylist.txt",
+    )
+)
+
 // using RustAdBlocker
 webView.webViewClient = object : WebViewClient() {
     override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {

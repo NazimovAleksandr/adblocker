@@ -34,6 +34,12 @@ class MainActivity : AppCompatActivity() {
 
         val rustAdBlocker: RustAdBlocker = RustAdBlocker.get()
 
+        rustAdBlocker.setRules(
+            listOf(
+                "https://easylist.to/easylist/easylist.txt",
+            )
+        )
+
         webView.webViewClient = object : WebViewClient() {
             override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
                 val url = request?.url.toString()
