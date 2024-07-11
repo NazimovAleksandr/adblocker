@@ -1,6 +1,22 @@
 # adblocker
 Аn example of using an ad blocker
 
+путь к файлам so:
+```text
+adblock/
+└── src/
+    └── main/
+        └── jniLibs/
+            ├── armeabi-v7a/
+            │   └── libadblock_coffee.so
+            ├── arm64-v8a/
+            │   └── libadblock_coffee.so
+            ├── x86/
+            │   └── libadblock_coffee.so
+            └── x86_64/
+                └── libadblock_coffee.so
+```
+
 ```kotlin
 override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
     val url = request?.url.toString()
