@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
             override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
                 val url = request?.url.toString()
 
+                // TODO: Переключение между реальными данными и фейковыми (для AdvtBlocker.checkUrls)
                 val fake = false
 
                 val isAdUrl: Boolean = if (fake) {
@@ -100,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         try {
             Log.d("TAG_advtBlocker", "initNativeLib: ${Build.SUPPORTED_ABIS[0]}")
 
+            // TODO: Переключение между реальными правилами для AdvtBlocker и фейковыми
             val fake = false
 
             val rules: List<String> = if (fake) {

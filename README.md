@@ -2,26 +2,31 @@
 Аn example of using an ad blocker
 
 ```kotlin
-// getting the RustAdBlocker object
-val rustAdBlocker: RustAdBlocker = RustAdBlocker.instance()
+override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
+    val url = request?.url.toString()
 
-// setting the rules
-rustAdBlocker.setRules(
-    listOf(
-        "https://easylist.to/easylist/easylist.txt",
-    )
-)
+    // Переключение между реальными данными и фейковыми (для AdvtBlocker.checkUrls)
+    val fake = false
 
-// using RustAdBlocker
-webView.webViewClient = object : WebViewClient() {
-    override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
-        val url = request?.url.toString()
+    val isAdUrl: Boolean = if (fake) { ... } else { ... }
 
-        val isAdUrl: Boolean = rustAdBlocker.check(url)
+    Log.d("TAG_advtBlocker", "shouldInterceptRequest: isAdUrl = $isAdUrl")
 
-        if (isAdUrl) return null
+    return super.shouldInterceptRequest(view, request)
+}
+```
 
-        return super.shouldInterceptRequest(view, request)
+```kotlin
+private fun initNativeLib() {
+    try {
+        // Переключение между реальными правилами для AdvtBlocker и фейковыми
+        val fake = false
+
+        val rules: List<String> = if (fake) { ... } else { ... }
+
+        advtBlocker = AdvtBlocker.createInstance(rules)
+    } catch (e: Exception) {
+        Log.e("TAG_advtBlocker", "initNativeLib: ${e.message}")
     }
 }
 ```
